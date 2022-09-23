@@ -1,6 +1,15 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom'
 import './fileClaim.css';
 const FileClaim = () => {
+    const history = useNavigate()
+    const location = useLocation()
+    const { pathname } = location
+    console.log(pathname,'hhh')
+
+    const handleEvent = () => {
+        history('/IncidentInfo')
+    }
     return (<div className="w-75 mx-auto py-4">
         <div className="row g-0 py-4 align-items-center border-bottom">
             <div className="col">
@@ -81,7 +90,7 @@ const FileClaim = () => {
             </div>
             <div className="text-center">
                 <p className="text-start py-3">Upon completion you'll be taken to our Assurant claims site.</p>
-                <button type="button" className="btn btn-primary py-2">Start A Claim</button>
+                <button type="button" className="btn btn-primary py-2" onClick={handleEvent}>Start A Claim</button>
         </div>
         </div>
     </div >)

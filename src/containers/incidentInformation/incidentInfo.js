@@ -63,7 +63,7 @@ const IncidentInfo = () => {
                   </button>
                 </div>
                 <div className="col-auto">
-                  {/* <button [routerLink]="['/service-options']" type="button" className="btn btn-primary py-2 px-4">Next</button> */}
+                  <button type="button" className="btn btn-primary py-2 px-4">Next</button>
                 </div>
               </div>
             </div>

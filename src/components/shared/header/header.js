@@ -1,29 +1,24 @@
 import React from "react";
 import './header.css';
 import PGH from '../../../assets/images/pgh-logo.svg';
+
+const navMenu = ['Home','Account','My Devices', 'Tech services'] 
+
 const Header = () => {
   return (
     <>
       <header className="bg-white py-2 border-bottom border-light">
         <div className="container-fluid d-flex py-1">
-          <a href="#">
+          <span >
             <img src={PGH} alt="pgh" />
-          </a>
+          </span>
           <ul className="nav ms-auto mb-0">
+            {navMenu.map(item => (
+            <li className="nav-item" key={item}>
+              <span className="nav-link">{item}</span>
+            </li> ))}
             <li className="nav-item">
-              <a href="#" className="nav-link">Home</a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">Account</a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">My Devices</a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">Tech Services</a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link text-primary">File a Claim</a>
+              <span className="nav-link text-primary">File a Claim</span>
             </li>
           </ul>
         </div>
