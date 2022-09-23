@@ -35,7 +35,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Navigate replace to="/incidentInfo" />}
+              element={<Navigate replace to="/fileClaim" />}
             />
             <Route path="/fileClaim" element={<FileClaim />}>
               {/* <Route path=":id" element={<TransactionDetails />} /> */}
