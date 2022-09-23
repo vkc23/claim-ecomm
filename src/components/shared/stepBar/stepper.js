@@ -2,7 +2,7 @@ import React from "react";
 import "./stepper.css";
 import ConfirmImg from "../../../assets/images/confirm-icon.png";
 
-const Stepper = () => {
+const Stepper = ({flag}) => {
   return (
     <>
       <div className="row justify-content-between py-3">
@@ -14,10 +14,10 @@ const Stepper = () => {
         </div>
       </div>
       <div className="d-flex justify-content-between steps-bar mb-2">
-        <span className="active">
+        <span className= {flag === 0 ? 'current' : "active"}>
           <img src={ConfirmImg} alt="confirm" />
         </span>
-        <span className="current">
+        <span >
           <img src={ConfirmImg} alt="confirm" />
         </span>
         <span>

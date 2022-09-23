@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./incidentInfo.css";
-
+import { useNavigate, useLocation } from 'react-router-dom'
 import Stepper from "../../components/shared/stepBar/stepper";
 import ItemDetails from "../../components/shared/itemDetails/itemDetails";
 
+
 const IncidentInfo = () => {
+const [flag, setFlag] = useState(0)
+const history = useNavigate()
+const location = useLocation()
+const { pathname } = location
+ 
+const handleStep = () => {
+    history('/ServiceOptions')
+    setFlag(flag)
+  }
   return (
     <>
       <div className="row bg-light py-4">
@@ -18,7 +28,7 @@ const IncidentInfo = () => {
               style={{backgroundColor: '#fcfcfc'}}
             >
               <h6 className="m-0 p-0 fw-bold">Incident Information</h6>
-              <Stepper></Stepper>
+              <Stepper flag={flag}></Stepper>
             </div>
             <div className="p-4">
               <span className="d-block fw-bold mb-3">
@@ -63,7 +73,7 @@ const IncidentInfo = () => {
                   </button>
                 </div>
                 <div className="col-auto">
-                  <button type="button" className="btn btn-primary py-2 px-4">Next</button>
+                  <button type="button" className="btn btn-primary py-2 px-4" onClick={handleStep}>Next</button>
                 </div>
               </div>
             </div>

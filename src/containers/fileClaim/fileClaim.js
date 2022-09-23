@@ -5,8 +5,6 @@ const FileClaim = () => {
     const history = useNavigate()
     const location = useLocation()
     const { pathname } = location
-    console.log(pathname,'hhh')
-
     const handleEvent = () => {
         history('/IncidentInfo')
     }
