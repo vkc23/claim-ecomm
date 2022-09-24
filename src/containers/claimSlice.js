@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = {};
 
 const claimSlice = createSlice({
-  name: "users",
+  name: "claims",
   initialState,
   reducers: {
     claimAdded(state, action) {
       state.push(action.payload);
     },
     saveIncidentInfo(state, action) {
-      console.log("payload", action.payload, "state", state);
+      console.log("payload", action.payload);
       state.push(action.payload);
     },
   },

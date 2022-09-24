@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Datepicker, Dropdown } from "../../components";
-import { DEVICE_TYPE } from "../../constants/mockData";
+import {
+  DEVICE_TYPE,
+  STILL_PROGRESS,
+  DAMAGE_DEVICE,
+} from "../../constants/mockData";
 import { claimAdded } from "../claimSlice";
 import "./fileClaim.css";
 
@@ -11,14 +15,17 @@ const FileClaim = () => {
   const location = useLocation();
   const { pathname } = location;
   const dispatch = useDispatch();
-  const [data, setData] = useState("");
+  const [data, setData] = useState({});
   const [error, setError] = useState(null);
+  const [selected, setSelected] = useState("possession_device_y");
   const handleChange = (e) => {
     const { value, name } = e.target;
+    console.log(value, name, "target==");
     setData({ ...data, [name]: value });
   };
-  console.log("data", data);
+
   const handleEvent = () => {
+    console.log(data, "data");
     if (data) {
       dispatch(
         claimAdded({
@@ -49,7 +56,7 @@ const FileClaim = () => {
               viewBox="0 0 16 16"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
               />
             </svg>{" "}
@@ -65,57 +72,44 @@ const FileClaim = () => {
         <span className="d-block fw-bold mb-3">
           Do you still have possession of the device?
         </span>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="possession_device"
-            id="possession_device_y"
-            checked="checked"
-          />
-          <label className="form-check-label" for="possession_device_y">
-            Yes, I have the device
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="possession_device"
-            id="possession_device_n"
-          />
-          <label className="form-check-label" for="possession_device_n">
-            No, I do not have the device
-          </label>
-        </div>
+
+        {STILL_PROGRESS.map((item, i) => (
+          <div className="form-check" key={`${item}_${i}`}>
+            <input
+              className="form-check-input"
+              type="radio"
+              id="stillProgress"
+              name="stillProgress"
+              checked={data?.stillProgress === item.label}
+              value={item.label}
+              onChange={handleChange}
+            />
+            <label className="form-check-label" htmlFor="stillProgress">
+              {item.label}
+            </label>
+          </div>
+        ))}
       </div>
       <div className="py-4 border-bottom">
         <span className="d-block fw-bold mb-3">
           Is your device damaged in some way?
         </span>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="damaged_device"
-            id="damaged_device_y"
-            checked="checked"
-          />
-          <label className="form-check-label" for="damaged_device_y">
-            Yes, I have the device
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="damaged_device"
-            id="damaged_device_n"
-          />
-          <label className="form-check-label" for="damaged_device_n">
-            No, I do not have the device
-          </label>
-        </div>
+        {DAMAGE_DEVICE.map((item, i) => (
+          <div className="form-check"key={`${item}_${i}`}>
+            <input
+              className="form-check-input"
+              type="radio"
+              id="damagedDevice"
+              name="damagedDevice"
+              checked={data?.damagedDevice === item.label}
+              value={item.label}
+              onChange={handleChange}
+            />
+            <label className="form-check-label" htmlFor="damagedDevice">
+              {item.label}
+            </label>
+          </div>
+        ))}
       </div>
       <div className="py-4">
         <span className="d-block fw-bold mb-3">
@@ -123,7 +117,13 @@ const FileClaim = () => {
           information below.
         </span>
         <div className="mb-3 w-50">
-          <Dropdown label="Device Type" options={DEVICE_TYPE} />
+          <Dropdown
+            label="Device Type"
+            onchange={handleChange}
+            options={DEVICE_TYPE}
+            name="deviceType"
+            value={data?.deviceType}
+          />
         </div>
         <div className="mb-3 w-50">
           <label className="form-label">Brand</label>
@@ -131,6 +131,7 @@ const FileClaim = () => {
             type="text"
             name="brand"
             className="form-control"
+            value={data?.brand}
             onChange={handleChange}
           />
         </div>
@@ -140,6 +141,7 @@ const FileClaim = () => {
             type="text"
             name="modal"
             className="form-control"
+            value={data?.modal}
             onChange={handleChange}
           />
         </div>
@@ -147,8 +149,9 @@ const FileClaim = () => {
           <label className="form-label">Device Nickname</label>
           <input
             type="text"
-            name="device"
+            name="deviceNickName"
             className="form-control"
+            value={data?.deviceNickName}
             onChange={handleChange}
           />
         </div>
@@ -156,8 +159,9 @@ const FileClaim = () => {
           <label className="form-label">Serial Number (Optional)</label>
           <input
             type="text"
-            name="serial"
+            name="serialNo"
             className="form-control"
+            value={data?.serialNo}
             onChange={handleChange}
           />
         </div>
@@ -165,13 +169,19 @@ const FileClaim = () => {
           <label className="form-label">Purchase Price, $</label>
           <input
             type="text"
-            name="price"
+            name="purchasePrice"
             className="form-control"
+            value={data?.purchasePrice}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3 w-50">
-          <Datepicker label="Purchase Date" onChange={() => {}} />
+          <Datepicker
+            label="Purchase Date"
+            name="PurchaseDate"
+            value={data?.PurchaseDate}
+            onChange={handleChange}
+          />
         </div>
         <div className="text-center">
           <p className="text-start py-3">
