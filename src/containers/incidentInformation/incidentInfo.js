@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Datepicker, Dropdown, ItemDetails, Stepper } from "../../components";
 import { REASON_FOR_CLAIM } from "../../constants/mockData";
 import "./incidentInfo.css";
 
 const IncidentInfo = () => {
+  const claimsData = useSelector((state) => state.claims);
+
+  console.log(claimsData, "claimsData");
   const [flag, setFlag] = useState("Service Options");
   const history = useNavigate();
   const location = useLocation();

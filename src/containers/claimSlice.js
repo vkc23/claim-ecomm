@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = {};
 
 const claimSlice = createSlice({
-  name: "users",
+  name: "claims",
   initialState,
   reducers: {
     claimAdded(state, action) {
-      state.push(action.payload);
+      return { ...state, ...action.payload };
     },
   },
 });
 
-export const { claimAdded } = claimSlice.actions;
-
-export default claimSlice.reducer;
+const { actions, reducer } = claimSlice;
+export const { claimAdded } = actions;
+export default reducer;
