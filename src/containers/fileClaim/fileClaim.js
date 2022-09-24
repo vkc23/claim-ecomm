@@ -23,8 +23,8 @@ const FileClaim = () => {
     setData({ ...data, [name]: value });
   };
 
-
   const handleEvent = () => {
+    console.log(data,'data')
     if (data) {
       dispatch(
         claimAdded({
