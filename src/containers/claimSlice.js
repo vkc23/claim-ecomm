@@ -9,9 +9,13 @@ const claimSlice = createSlice({
     claimAdded(state, action) {
       return { ...state, ...action.payload };
     },
+    saveIncidentInfo(state, action) {
+      console.log("payload", action.payload);
+      state.push(action.payload);
+    },
   },
 });
 
-const { actions, reducer } = claimSlice;
-export const { claimAdded } = actions;
-export default reducer;
+export const { claimAdded, saveIncidentInfo } = claimSlice.actions;
+
+export default claimSlice.reducer;
