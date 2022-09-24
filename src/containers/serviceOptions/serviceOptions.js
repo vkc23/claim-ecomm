@@ -76,11 +76,10 @@ const stepBack = () => {
                         width="35"
                         className="me-3"
                       />{" "}
-                      Mail In Repair
+                      Schedule a visit
                     </h6>
                     <p>
-                      If your claim is approved, we will send you a shipping
-                      label so you can send us your defective device for repair.
+                    Make an appointment at an Pocket Geek Authorized Service Provider
                     </p>
                     <div className="d-flex justify-content-between">
                       <span>Deductible:</span> <span>$89.00</span>
@@ -96,11 +95,10 @@ const stepBack = () => {
                         width="35"
                         className="me-3"
                       />{" "}
-                      In Store Repair
+                      Send in for repair
                     </h6>
                     <p>
-                      You will be given a choice of which repair facility to
-                      take your device.
+                    A courier will pick up your product and deliver it to Pocket Geek
                     </p>
                     <div className="d-flex justify-content-between">
                       <span>Deductible:</span> <span>$89.00</span>
@@ -116,9 +114,9 @@ const stepBack = () => {
                         width="35"
                         className="me-3"
                       />{" "}
-                      Reimbursement
+                      Contact us
                     </h6>
-                    <p>We'll reimburse you quickly and conveniently.</p>
+                    <p>Talk to an Pocket Geek Support Advisor</p>
                   </div>
                 </div>
               </div>
