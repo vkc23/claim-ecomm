@@ -13,6 +13,9 @@ const handleStep = () => {
   history('/serviceFulfillment')
   setFlag(flag)
 }
+const stepBack = () => {
+  history(-1)
+} 
   return (
     <>
       <div className="row bg-light py-4">
@@ -124,6 +127,7 @@ const handleStep = () => {
                   <button
                     type="button"
                     className="btn btn-outline-primary py-2 px-4"
+                    onClick={stepBack}
                   >
                     Back
                   </button>

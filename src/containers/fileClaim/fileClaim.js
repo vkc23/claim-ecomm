@@ -1,10 +1,16 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom'
 import './fileClaim.css';
 const FileClaim = () => {
     const history = useNavigate()
     const location = useLocation()
     const { pathname } = location
+    const dispatch = useDispatch();
+    const handleChange = (e) => {
+        const [ value ] = e.target
+        console.log(value,'value')
+    }
     const handleEvent = () => {
         history('/IncidentInfo')
     }
@@ -64,27 +70,27 @@ const FileClaim = () => {
             </div>
             <div className="mb-3 w-50">
                 <label className="form-label">Brand</label>
-                <input type="text" className="form-control" />
+                <input type="text"  name="brand" className="form-control" onChange={handleChange}/>
             </div>
             <div className="mb-3 w-50">
                 <label className="form-label">Model</label>
-                <input type="text" className="form-control" />
+                <input type="text" name="modal" className="form-control" onChange={handleChange}/>
             </div>
             <div className="mb-3 w-50">
                 <label className="form-label">Device Nickname</label>
-                <input type="text" className="form-control" />
+                <input type="text" name="device" className="form-control" onChange={handleChange}/>
             </div>
             <div className="mb-3 w-50">
                 <label className="form-label">Serial Number (Optional)</label>
-                <input type="text" className="form-control" />
+                <input type="text" name="serial" className="form-control" onChange={handleChange}/>
             </div>
             <div className="mb-3 w-50">
                 <label className="form-label">Purchase Price, $</label>
-                <input type="text" className="form-control" />
+                <input type="text" name="price" className="form-control" onChange={handleChange}/>
             </div>
             <div className="mb-3 w-50">
                 <label className="form-label">Purchase Date</label>
-                <input type="text" className="form-control" />
+                <input type="text" name="date" className="form-control" onChange={handleChange} />
             </div>
             <div className="text-center">
                 <p className="text-start py-3">Upon completion you'll be taken to our Assurant claims site.</p>

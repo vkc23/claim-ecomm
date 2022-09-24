@@ -13,6 +13,9 @@ const handleStep = () => {
     history('/claimSummary')
     setFlag(flag)
   }
+  const stepBack = () => {
+    history(-1)
+  } 
   return (
     <>
       <div className="row bg-light py-4">
@@ -87,6 +90,7 @@ const handleStep = () => {
                   <button
                     type="button"
                     className="btn btn-outline-primary py-2 px-4"
+                    onClick={stepBack}
                   >
                     Back
                   </button>
@@ -95,8 +99,6 @@ const handleStep = () => {
                   <button type="button" className="btn btn-primary py-2 px-4" onClick={handleStep}>
                     Next
                   </button>
-                  {/* <button [routerLink]="['/summary']" type="button"
-                            className="btn btn-primary py-2 px-4">Next</button> */}
                 </div>
               </div>
             </div>
