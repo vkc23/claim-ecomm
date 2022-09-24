@@ -1,15 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import MaintenanceImg from "../../assets/images/maintenance-icon.svg";
 import { Card, ItemDetails, Stepper } from "../../components";
+import MaintenanceImg from "../../assets/images/maintenance-icon.svg";
+import { saveServiceOptions } from "../claimSlice";
 
 function ServiceOptions() {
   const [flag, setFlag] = useState("Service Fulfillment");
+  const [data, setData] = useState({});
   const history = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+  const claimsData = useSelector((state) => state.claims);
+
+  console.log(claimsData, "ServiceOptions");
+
   const { pathname } = location;
 
   const handleStep = () => {
+    dispatch(
+      saveServiceOptions({
+        data,
+      })
+    );
     history("/serviceFulfillment");
     setFlag(flag);
   };
@@ -120,8 +133,6 @@ function ServiceOptions() {
                   >
                     Next
                   </button>
-                  {/* <button [routerLink]="['/service-fulfillment']" type="button"
-                            className="btn btn-primary py-2 px-4">Next</button> */}
                 </div>
               </div>
             </div>

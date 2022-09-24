@@ -7,15 +7,25 @@ const claimSlice = createSlice({
   initialState,
   reducers: {
     claimAdded(state, action) {
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload.data };
     },
     saveIncidentInfo(state, action) {
-      console.log("payload", action.payload);
-      state.push(action.payload);
+      return { ...state, ...action.payload.data };
+    },
+    saveServiceOptions(state, action) {
+      return { ...state, ...action.payload.data };
+    },
+    saveServiceFulfillment(state, action) {
+      return { ...state, ...action.payload.data };
     },
   },
 });
 
-export const { claimAdded, saveIncidentInfo } = claimSlice.actions;
+export const {
+  claimAdded,
+  saveIncidentInfo,
+  saveServiceOptions,
+  saveServiceFulfillment,
+} = claimSlice.actions;
 
 export default claimSlice.reducer;

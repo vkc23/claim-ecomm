@@ -12,7 +12,7 @@ export const DEVICE_TYPE = [
   { id: 5, label: "Other", value: "other" },
 ];
 
-export const STILL_PROGRESS = [
+export const STILL_POSSESSION = [
   { label: "Yes, I have the device" },
   { label: "No, I do not have the device" },
 ];
@@ -21,4 +21,9 @@ export const STILL_PROGRESS = [
 export const DAMAGE_DEVICE = [
   { label: "Yes, device fully damaged" },
   { label: "No, device partially damaged" },
+];
+
+export const MAILING_ADDRESS = [
+  { label: "Same as policy" },
+  { label: "New Address" },
 ];

@@ -1,17 +1,37 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ItemDetails, Stepper } from "../../components";
+import { RadioBtn } from "../../components";
+import { MAILING_ADDRESS } from "../../constants/mockData";
+import { saveServiceFulfillment } from "../claimSlice";
 
 function ServiceFulfillment() {
   const [flag, setFlag] = useState("Summary");
+  const [data, setData] = useState({});
   const history = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const { pathname } = location;
 
+  const claimsData = useSelector((state) => state.claims);
+  console.log(claimsData, "ServiceFulfillment");
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
+  };
+
   const handleStep = () => {
+    dispatch(
+      saveServiceFulfillment({
+        data,
+      })
+    );
     history("/claimSummary");
     setFlag(flag);
   };
+
   const stepBack = () => {
     history(-1);
   };
@@ -39,39 +59,19 @@ function ServiceFulfillment() {
                 business day)
               </p>
               <ul className="list-inline pt-4">
-                <li className="list-inline-item">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="possession_device"
-                      id="possession_device_y"
-                      checked="checked"
+                {MAILING_ADDRESS.map((item, i) => (
+                  <li
+                    className={`list-inline-item ${i != 0 && "ms-4"} `}
+                    key={`${item}_${i}`}
+                  >
+                    <RadioBtn
+                      name="mailingAddress"
+                      item={item}
+                      selectedValue={data?.mailingAddress}
+                      onChange={handleChange}
                     />
-                    <label
-                      className="form-check-label"
-                      htmlFor="possession_device_y"
-                    >
-                      Same as policy
-                    </label>
-                  </div>
-                </li>
-                <li className="list-inline-item ms-4">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="possession_device"
-                      id="possession_device_n"
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="possession_device_n"
-                    >
-                      New Address
-                    </label>
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
               <p>
                 <b>Steve Smith</b>

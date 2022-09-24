@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Datepicker, Dropdown } from "../../components";
+import { Datepicker, Dropdown, RadioBtn } from "../../components";
 import {
   DEVICE_TYPE,
-  STILL_PROGRESS,
+  STILL_POSSESSION,
   DAMAGE_DEVICE,
 } from "../../constants/mockData";
 import { claimAdded } from "../claimSlice";
@@ -20,13 +20,11 @@ const FileClaim = () => {
   const [selected, setSelected] = useState("possession_device_y");
   const handleChange = (e) => {
     const { value, name } = e.target;
-    console.log(value, name, "target==");
     setData({ ...data, [name]: value });
   };
 
   const handleEvent = () => {
-    console.log(data, "data");
-    if (data) {
+    if (Object.keys(data)?.length) {
       dispatch(
         claimAdded({
           data,
@@ -72,22 +70,14 @@ const FileClaim = () => {
         <span className="d-block fw-bold mb-3">
           Do you still have possession of the device?
         </span>
-
-        {STILL_PROGRESS.map((item, i) => (
-          <div className="form-check" key={`${item}_${i}`}>
-            <input
-              className="form-check-input"
-              type="radio"
-              id="stillProgress"
-              name="stillProgress"
-              checked={data?.stillProgress === item.label}
-              value={item.label}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="stillProgress">
-              {item.label}
-            </label>
-          </div>
+        {STILL_POSSESSION.map((item, i) => (
+          <RadioBtn
+            key={`${item}_${i}`}
+            name="stillPossession"
+            item={item}
+            selectedValue={data?.stillPossession}
+            onChange={handleChange}
+          />
         ))}
       </div>
       <div className="py-4 border-bottom">
@@ -95,21 +85,20 @@ const FileClaim = () => {
           Is your device damaged in some way?
         </span>
         {DAMAGE_DEVICE.map((item, i) => (
-          <div className="form-check"key={`${item}_${i}`}>
-            <input
-              className="form-check-input"
-              type="radio"
-              id="damagedDevice"
-              name="damagedDevice"
-              checked={data?.damagedDevice === item.label}
-              value={item.label}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="damagedDevice">
-              {item.label}
-            </label>
-          </div>
+          <RadioBtn
+            key={`${item}_${i}`}
+            name="damagedDevice"
+            item={item}
+            selectedValue={data?.damagedDevice}
+            onChange={handleChange}
+          />
         ))}
+        {/* <RadioBtn
+          name="damagedDevice"
+          options={DAMAGE_DEVICE}
+          selectedValue={data?.damagedDevice}
+          onChange={handleChange}
+        /> */}
       </div>
       <div className="py-4">
         <span className="d-block fw-bold mb-3">
