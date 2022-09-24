@@ -1,21 +1,20 @@
-import React, {useState} from "react";
-import { useNavigate, useLocation } from 'react-router-dom'
-import Stepper from "../../components/shared/stepBar/stepper";
-import ItemDetails from "../../components/shared/itemDetails/itemDetails";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ItemDetails, Stepper } from "../../components";
 
 function ServiceFulfillment() {
-const [flag, setFlag] = useState('Summary')
-const history = useNavigate()
-const location = useLocation()
-const { pathname } = location
- 
-const handleStep = () => {
-    history('/claimSummary')
-    setFlag(flag)
-  }
+  const [flag, setFlag] = useState("Summary");
+  const history = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
+
+  const handleStep = () => {
+    history("/claimSummary");
+    setFlag(flag);
+  };
   const stepBack = () => {
-    history(-1)
-  } 
+    history(-1);
+  };
   return (
     <>
       <div className="row bg-light py-4">
@@ -29,7 +28,7 @@ const handleStep = () => {
               style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Service Fulfillment</h6>
-              <Stepper  flag={flag} pathName={pathname}></Stepper>
+              <Stepper flag={flag} pathName={pathname}></Stepper>
             </div>
             <div className="p-4">
               <span className="d-block fw-bold mb-3">Mail in Repair</span>
@@ -96,7 +95,11 @@ const handleStep = () => {
                   </button>
                 </div>
                 <div className="col-auto">
-                  <button type="button" className="btn btn-primary py-2 px-4" onClick={handleStep}>
+                  <button
+                    type="button"
+                    className="btn btn-primary py-2 px-4"
+                    onClick={handleStep}
+                  >
                     Next
                   </button>
                 </div>

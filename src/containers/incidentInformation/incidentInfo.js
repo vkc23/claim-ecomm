@@ -1,34 +1,33 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Datepicker, Dropdown, ItemDetails, Stepper } from "../../components";
+import { REASON_FOR_CLAIM } from "../../constants/mockData";
 import "./incidentInfo.css";
-import { useNavigate, useLocation } from 'react-router-dom'
-import Stepper from "../../components/shared/stepBar/stepper";
-import ItemDetails from "../../components/shared/itemDetails/itemDetails";
-
 
 const IncidentInfo = () => {
-const [flag, setFlag] = useState('Service Options')
-const history = useNavigate()
-const location = useLocation()
-const { pathname } = location
- 
-const handleStep = () => {
-    history('/ServiceOptions')
-    setFlag(flag)
-  }
- const stepBack = () => {
-   history(-1)
- } 
+  const [flag, setFlag] = useState("Service Options");
+  const history = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
+
+  const handleStep = () => {
+    history("/ServiceOptions");
+    setFlag(flag);
+  };
+  const stepBack = () => {
+    history(-1);
+  };
   return (
     <>
       <div className="row bg-light py-4">
         <div className="col-8">
           <div
             className="bg-white rounded box-shadow"
-            style={{overflow: 'hidden'}}
+            style={{ overflow: "hidden" }}
           >
             <div
               className="p-4 border-bottom"
-              style={{backgroundColor: '#fcfcfc'}}
+              style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Incident Information</h6>
               <Stepper flag={flag} pathName={pathname}></Stepper>
@@ -38,8 +37,7 @@ const handleStep = () => {
                 Please tell us what happened
               </span>
               <div className="mb-3 w-50">
-                <label className="form-label">Date of Incident</label>
-                <input type="text" className="form-control" />
+                <Datepicker label="Date of Incident" onChange={() => {}} />
               </div>
               <div className="mb-3 w-50">
                 <label className="form-label">
@@ -48,12 +46,10 @@ const handleStep = () => {
                 <textarea className="form-control"></textarea>
               </div>
               <div className="mb-3 w-50">
-                <label className="form-label">
-                  Select the reason for your claim/request.
-                </label>
-                <select className="form-select" name="device_type">
-                  <option>Select</option>
-                </select>
+                <Dropdown
+                  label="Select the reason for your claim/request."
+                  options={REASON_FOR_CLAIM}
+                />
               </div>
               <div className="form-check">
                 <input
@@ -77,7 +73,13 @@ const handleStep = () => {
                   </button>
                 </div>
                 <div className="col-auto">
-                  <button type="button" className="btn btn-primary py-2 px-4" onClick={handleStep}>Next</button>
+                  <button
+                    type="button"
+                    className="btn btn-primary py-2 px-4"
+                    onClick={handleStep}
+                  >
+                    Next
+                  </button>
                 </div>
               </div>
             </div>
