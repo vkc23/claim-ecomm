@@ -1,18 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom'
+import { claimAdded } from '../claimSlice';
 import './fileClaim.css';
 const FileClaim = () => {
     const history = useNavigate()
     const location = useLocation()
     const { pathname } = location
     const dispatch = useDispatch();
+    const [data, setData ] = useState('')
+    const [error, setError] = useState(null);
     const handleChange = (e) => {
-        const [ value ] = e.target
-        console.log(value,'value')
+        const { value, name } = e.target
+          setData({...data, [name]:value})
     }
     const handleEvent = () => {
         history('/IncidentInfo')
+        if (data.length) {
+            dispatch(
+              claimAdded({
+                 data
+              })
+            );
+      
+            setError(null);
+            history.push("/");
+          } else {
+            setError("Fill in all fields");  // used in UI 
+          }
     }
     return (<div className="w-75 mx-auto py-4">
         <div className="row g-0 py-4 align-items-center border-bottom">
