@@ -1,22 +1,51 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Datepicker, Dropdown, ItemDetails, Stepper } from "../../components";
+import { saveIncidentInfo } from "../claimSlice";
 import { REASON_FOR_CLAIM } from "../../constants/mockData";
 import "./incidentInfo.css";
 
 const IncidentInfo = () => {
-  const [flag, setFlag] = useState("Service Options");
   const history = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const [flag, setFlag] = useState("Service Options");
+  const [incidentData, setIncidentData] = useState({
+    isComplete: false,
+    data: {},
+  });
+
   const { pathname } = location;
 
-  const handleStep = () => {
-    history("/ServiceOptions");
-    setFlag(flag);
+  const handleNext = () => {
+    if (Object.keys(incidentData.data)?.length) {
+      dispatch(
+        saveIncidentInfo({
+          data: incidentData.data,
+        })
+      );
+      history("/serviceOptions");
+      setFlag(flag);
+    }
   };
+
   const stepBack = () => {
     history(-1);
   };
+
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target;
+    // console.log("target", name, value, type);
+    const { isComplete, data } = incidentData;
+    const updateData = {
+      ...data,
+      [name]: type === "checkbox" ? checked : value,
+    };
+    setIncidentData({ ...incidentData, data: updateData });
+  };
+
   return (
     <>
       <div className="row bg-light py-4">
@@ -37,18 +66,31 @@ const IncidentInfo = () => {
                 Please tell us what happened
               </span>
               <div className="mb-3 w-50">
-                <Datepicker label="Date of Incident" onChange={() => {}} />
+                <Datepicker
+                  label="Date of Incident"
+                  name="incidentDate"
+                  value={incidentData.data?.incidentDate}
+                  onChange={handleChange}
+                />
               </div>
               <div className="mb-3 w-50">
                 <label className="form-label">
                   Describe the issue or reason for your request.
                 </label>
-                <textarea className="form-control"></textarea>
+                <textarea
+                  className="form-control"
+                  name="describeIssue"
+                  value={incidentData.data?.describeIssue}
+                  onChange={handleChange}
+                ></textarea>
               </div>
               <div className="mb-3 w-50">
                 <Dropdown
                   label="Select the reason for your claim/request."
                   options={REASON_FOR_CLAIM}
+                  name="claimReason"
+                  value={incidentData.data?.claimReason}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-check">
@@ -56,6 +98,9 @@ const IncidentInfo = () => {
                   className="form-check-input"
                   type="checkbox"
                   id="i_agree"
+                  name="isTermAndCondition"
+                  checked={incidentData.data?.isTermAndCondition}
+                  onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="i_agree">
                   I agree to the Terms of Use and acknowledge that I have
@@ -76,7 +121,7 @@ const IncidentInfo = () => {
                   <button
                     type="button"
                     className="btn btn-primary py-2 px-4"
-                    onClick={handleStep}
+                    onClick={handleNext}
                   >
                     Next
                   </button>

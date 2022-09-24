@@ -5,6 +5,7 @@ import { Datepicker, Dropdown } from "../../components";
 import { DEVICE_TYPE } from "../../constants/mockData";
 import { claimAdded } from "../claimSlice";
 import "./fileClaim.css";
+
 const FileClaim = () => {
   const history = useNavigate();
   const location = useLocation();
