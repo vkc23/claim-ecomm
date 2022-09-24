@@ -6,7 +6,7 @@ import ItemDetails from "../../components/shared/itemDetails/itemDetails";
 
 
 const IncidentInfo = () => {
-const [flag, setFlag] = useState(0)
+const [flag, setFlag] = useState('Service Options')
 const history = useNavigate()
 const location = useLocation()
 const { pathname } = location
@@ -28,7 +28,7 @@ const handleStep = () => {
               style={{backgroundColor: '#fcfcfc'}}
             >
               <h6 className="m-0 p-0 fw-bold">Incident Information</h6>
-              <Stepper flag={flag}></Stepper>
+              <Stepper flag={flag} pathName={pathname}></Stepper>
             </div>
             <div className="p-4">
               <span className="d-block fw-bold mb-3">

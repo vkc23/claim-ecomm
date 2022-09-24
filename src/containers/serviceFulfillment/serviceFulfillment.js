@@ -1,8 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
+import { useNavigate, useLocation } from 'react-router-dom'
 import Stepper from "../../components/shared/stepBar/stepper";
 import ItemDetails from "../../components/shared/itemDetails/itemDetails";
 
 function ServiceFulfillment() {
+const [flag, setFlag] = useState('Summary')
+const history = useNavigate()
+const location = useLocation()
+const { pathname } = location
+ 
+const handleStep = () => {
+    history('/claimSummary')
+    setFlag(flag)
+  }
   return (
     <>
       <div className="row bg-light py-4">
@@ -16,7 +26,7 @@ function ServiceFulfillment() {
               style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Service Fulfillment</h6>
-              <Stepper></Stepper>
+              <Stepper  flag={flag} pathName={pathname}></Stepper>
             </div>
             <div className="p-4">
               <span className="d-block fw-bold mb-3">Mail in Repair</span>
@@ -82,7 +92,7 @@ function ServiceFulfillment() {
                   </button>
                 </div>
                 <div className="col-auto">
-                  <button type="button" className="btn btn-primary py-2 px-4">
+                  <button type="button" className="btn btn-primary py-2 px-4" onClick={handleStep}>
                     Next
                   </button>
                   {/* <button [routerLink]="['/summary']" type="button"

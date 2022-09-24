@@ -1,8 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import Stepper from "../../components/shared/stepBar/stepper";
 import ItemDetails from "../../components/shared/itemDetails/itemDetails";
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function ClaimSummary() {
+const [flag, setFlag] = useState('submit')
+const history = useNavigate()
+const location = useLocation()
+const { pathname } = location
+
+const handleStep = () => {
+  history('/claimPlaced')
+  setFlag(flag)
+}
   return (
     <>
       <div className="row bg-light py-4">
@@ -16,7 +26,7 @@ function ClaimSummary() {
               style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Summary</h6>
-              <Stepper></Stepper>
+              <Stepper  flag={flag} pathName={pathname}></Stepper>
             </div>
             <div className="p-4">
               <div className="d-flex justify-content-between border-bottom py-3">
@@ -112,7 +122,7 @@ function ClaimSummary() {
                   </button>
                 </div>
                 <div className="col-auto">
-                  <button type="button" className="btn btn-primary py-2 px-4">
+                  <button type="button" className="btn btn-primary py-2 px-4" onClick={handleStep}>
                     Submit
                   </button>
                 </div>

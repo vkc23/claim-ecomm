@@ -4,13 +4,13 @@ import Stepper from "../../components/shared/stepBar/stepper";
 import ItemDetails from "../../components/shared/itemDetails/itemDetails";
 import MaintenanceImg from "../../assets/images/maintenance-icon.svg";
 function ServiceOptions() {
-  const [flag, setFlag] = useState(2)
+  const [flag, setFlag] = useState('Service Fulfillment')
   const history = useNavigate()
 const location = useLocation()
 const { pathname } = location
 
 const handleStep = () => {
-  history('/ServiceOptions')
+  history('/serviceFulfillment')
   setFlag(flag)
 }
   return (
@@ -26,7 +26,7 @@ const handleStep = () => {
               style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Service Options</h6>
-              <Stepper></Stepper>
+              <Stepper flag={flag} pathName={pathname}></Stepper>
             </div>
             <div className="p-4">
               <span className="d-block fw-bold mb-3">
