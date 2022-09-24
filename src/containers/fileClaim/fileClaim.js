@@ -5,6 +5,11 @@ import { Datepicker, Dropdown } from "../../components";
 import { DEVICE_TYPE } from "../../constants/mockData";
 import { claimAdded } from "../claimSlice";
 import "./fileClaim.css";
+const redioData = [
+    {id: 'possession_device_y', title: ' Yes, I have the device', name:'Yes'}, 
+    {id: 'possession_device_n', title: 'No, I do not have the device', name:"No"}
+]
+
 const FileClaim = () => {
   const history = useNavigate();
   const location = useLocation();
@@ -12,11 +17,13 @@ const FileClaim = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState("");
   const [error, setError] = useState(null);
+  const [selected, setSelected ] = useState('possession_device_y')
   const handleChange = (e) => {
     const { value, name } = e.target;
     setData({ ...data, [name]: value });
   };
-  console.log("data", data);
+
+
   const handleEvent = () => {
     if (data) {
       dispatch(
@@ -64,29 +71,22 @@ const FileClaim = () => {
         <span className="d-block fw-bold mb-3">
           Do you still have possession of the device?
         </span>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="possession_device"
-            id="possession_device_y"
-            checked="checked"
-          />
-          <label className="form-check-label" for="possession_device_y">
-            Yes, I have the device
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="possession_device"
-            id="possession_device_n"
-          />
-          <label className="form-check-label" for="possession_device_n">
-            No, I do not have the device
-          </label>
-        </div>
+
+         {redioData.map((item) =>  
+         <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={item.name}
+              checked=""
+              value=""
+              onChange={handleChange}
+            />
+            <label className="form-check-label" for={item.id}>
+              {item.title}
+            </label>
+          </div> )}
+
       </div>
       <div className="py-4 border-bottom">
         <span className="d-block fw-bold mb-3">
@@ -96,9 +96,10 @@ const FileClaim = () => {
           <input
             className="form-check-input"
             type="radio"
-            name="damaged_device"
+            name="damaged_device_y"
             id="damaged_device_y"
             checked="checked"
+            onChange={handleChange}
           />
           <label className="form-check-label" for="damaged_device_y">
             Yes, I have the device
@@ -108,8 +109,9 @@ const FileClaim = () => {
           <input
             className="form-check-input"
             type="radio"
-            name="damaged_device"
+            name="damaged_device_n"
             id="damaged_device_n"
+            onChange={handleChange}
           />
           <label className="form-check-label" for="damaged_device_n">
             No, I do not have the device
@@ -122,7 +124,7 @@ const FileClaim = () => {
           information below.
         </span>
         <div className="mb-3 w-50">
-          <Dropdown label="Device Type" options={DEVICE_TYPE} />
+          <Dropdown label="Device Type" onchange={handleChange} options={DEVICE_TYPE} />
         </div>
         <div className="mb-3 w-50">
           <label className="form-label">Brand</label>
@@ -170,7 +172,7 @@ const FileClaim = () => {
           />
         </div>
         <div className="mb-3 w-50">
-          <Datepicker label="Purchase Date" onChange={() => {}} />
+          <Datepicker label="Purchase Date" name="date"  onChange={handleChange} />
         </div>
         <div className="text-center">
           <p className="text-start py-3">
