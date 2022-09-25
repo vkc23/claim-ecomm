@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ItemDetails, Stepper, Button } from "../../components";
+import { Button, ItemDetails, Stepper } from "../../components";
 
 function ClaimSummary() {
   const [flag, setFlag] = useState("submit");
@@ -114,10 +114,10 @@ function ClaimSummary() {
               </div>
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
-                <Button label="Back" variant="outline" />
+                  <Button label="Back" variant="outline" />
                 </div>
                 <div className="col-auto">
-                <Button label="Submit" variant="primary" click={handleStep} />
+                  <Button label="Submit" variant="primary" click={handleStep} />
                 </div>
               </div>
             </div>
