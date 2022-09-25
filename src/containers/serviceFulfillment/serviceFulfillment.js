@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ItemDetails, Stepper } from "../../components";
+import { ItemDetails, Stepper, Button } from "../../components";
 import { RadioBtn } from "../../components";
 import { MAILING_ADDRESS } from "../../constants/mockData";
 import { saveServiceFulfillment } from "../claimSlice";
@@ -32,9 +32,6 @@ function ServiceFulfillment() {
     setFlag(flag);
   };
 
-  const stepBack = () => {
-    history(-1);
-  };
   return (
     <>
       <div className="row bg-light py-4">
@@ -86,22 +83,17 @@ function ServiceFulfillment() {
               </p>
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
-                  <button
-                    type="button"
-                    className="btn btn-outline-primary py-2 px-4"
-                    onClick={stepBack}
-                  >
-                    Back
-                  </button>
+                  <Button label="Back" variant="outline" />
                 </div>
                 <div className="col-auto">
-                  <button
+                  <Button label="Next" variant="primary" click={handleStep} />
+                  {/* <button
                     type="button"
                     className="btn btn-primary py-2 px-4"
                     onClick={handleStep}
                   >
                     Next
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

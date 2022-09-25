@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ItemDetails, Stepper } from "../../components";
+import { ItemDetails, Stepper, Button } from "../../components";
 
 function ClaimSummary() {
   const [flag, setFlag] = useState("submit");
@@ -12,9 +12,7 @@ function ClaimSummary() {
     history("/claimPlaced");
     setFlag(flag);
   };
-  const stepBack = () => {
-    history(-1);
-  };
+
   return (
     <>
       <div className="row bg-light py-4">
@@ -116,22 +114,10 @@ function ClaimSummary() {
               </div>
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
-                  <button
-                    type="button"
-                    className="btn btn-outline-primary py-2 px-4"
-                    onClick={stepBack}
-                  >
-                    Back
-                  </button>
+                <Button label="Back" variant="outline" />
                 </div>
                 <div className="col-auto">
-                  <button
-                    type="button"
-                    className="btn btn-primary py-2 px-4"
-                    onClick={handleStep}
-                  >
-                    Submit
-                  </button>
+                <Button label="Submit" variant="primary" click={handleStep} />
                 </div>
               </div>
             </div>

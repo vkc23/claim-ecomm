@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Datepicker, Dropdown, RadioBtn } from "../../components";
+import { Datepicker, Dropdown, RadioBtn, Button } from "../../components";
 import {
   DEVICE_TYPE,
   STILL_POSSESSION,
@@ -18,6 +18,7 @@ const FileClaim = () => {
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
   const [selected, setSelected] = useState("possession_device_y");
+
   const handleChange = (e) => {
     const { value, name } = e.target;
     setData({ ...data, [name]: value });
@@ -93,12 +94,6 @@ const FileClaim = () => {
             onChange={handleChange}
           />
         ))}
-        {/* <RadioBtn
-          name="damagedDevice"
-          options={DAMAGE_DEVICE}
-          selectedValue={data?.damagedDevice}
-          onChange={handleChange}
-        /> */}
       </div>
       <div className="py-4">
         <span className="d-block fw-bold mb-3">
@@ -176,13 +171,7 @@ const FileClaim = () => {
           <p className="text-start py-3">
             Upon completion you'll be taken to our Assurant claims site.
           </p>
-          <button
-            type="button"
-            className="btn btn-primary py-2"
-            onClick={handleEvent}
-          >
-            Start A Claim
-          </button>
+          <Button label="Start A Claim" variant="primary" click={handleEvent} />
         </div>
       </div>
     </div>

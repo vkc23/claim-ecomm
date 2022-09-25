@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Card, ItemDetails, Stepper } from "../../components";
+import { Card, ItemDetails, Stepper, Button } from "../../components";
 import MaintenanceImg from "../../assets/images/maintenance-icon.svg";
 import { saveServiceOptions } from "../claimSlice";
 
@@ -26,9 +26,7 @@ function ServiceOptions() {
     history("/serviceFulfillment");
     setFlag(flag);
   };
-  const stepBack = () => {
-    history(-1);
-  };
+
   return (
     <>
       <div className="row bg-light py-4">
@@ -117,22 +115,28 @@ function ServiceOptions() {
               </div>
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
-                  <button
+                <Button label="Back" variant="outline" />
+                  {/* <button
                     type="button"
                     className="btn btn-outline-primary py-2 px-4"
                     onClick={stepBack}
                   >
                     Back
-                  </button>
+                  </button> */}
                 </div>
                 <div className="col-auto">
-                  <button
+                <Button
+                    label="Next"
+                    variant="primary"
+                    click={handleStep}
+                  />
+                  {/* <button
                     type="button"
                     className="btn btn-primary py-2 px-4"
                     onClick={handleStep}
                   >
                     Next
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

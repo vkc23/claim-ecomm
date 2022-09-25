@@ -1,10 +1,10 @@
 import React from "react";
 import BarclayImg from "../../assets/images/barclay-card.png";
 import ConfirmImg from "../../assets/images/confirm-icon.png";
-
-import { ItemDetails } from "../../components";
+import { ItemDetails, Button } from "../../components";
 
 function ClaimPlaced() {
+  const goToDashboard = () => {};
   return (
     <>
       <div className="row bg-light py-4">
@@ -158,9 +158,11 @@ function ClaimPlaced() {
                 </p>
               </div>
               <div className="pt-4">
-                <button type="button" className="btn btn-primary py-2 px-4">
-                  Go to Claim Dashboard
-                </button>
+                <Button
+                  label="Go to Claim Dashboard"
+                  variant="primary"
+                  click={goToDashboard}
+                />
               </div>
             </div>
           </div>

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Datepicker, Dropdown, ItemDetails, Stepper } from "../../components";
+import {
+  Datepicker,
+  Dropdown,
+  ItemDetails,
+  Stepper,
+  Button,
+} from "../../components";
 import { REASON_FOR_CLAIM } from "../../constants/mockData";
 import { saveIncidentInfo } from "../claimSlice";
 import "./incidentInfo.css";
@@ -32,10 +38,6 @@ const IncidentInfo = () => {
       history("/serviceOptions");
       setFlag(flag);
     }
-  };
-
-  const stepBack = () => {
-    history(-1);
   };
 
   const handleChange = (e) => {
@@ -112,22 +114,15 @@ const IncidentInfo = () => {
               </div>
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
-                  <button
-                    type="button"
-                    className="btn btn-outline-primary py-2 px-4"
-                    onClick={stepBack}
-                  >
-                    Back
-                  </button>
+                  <Button label="Back" variant="outline" />
                 </div>
                 <div className="col-auto">
-                  <button
-                    type="button"
-                    className="btn btn-primary py-2 px-4"
-                    onClick={handleNext}
-                  >
-                    Next
-                  </button>
+                  <Button
+                    label="Next"
+                    variant="primary"
+                    isDisabled={!incidentData.data?.isTermAndCondition}
+                    click={handleNext}
+                  />
                 </div>
               </div>
             </div>
