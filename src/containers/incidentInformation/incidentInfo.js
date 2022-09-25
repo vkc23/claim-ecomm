@@ -9,6 +9,7 @@ import {
   Button,
 } from "../../components";
 import { REASON_FOR_CLAIM } from "../../constants/mockData";
+import { showToast } from "../../utils/Helper";
 import { saveIncidentInfo } from "../claimSlice";
 import "./incidentInfo.css";
 
@@ -37,7 +38,7 @@ const IncidentInfo = () => {
       );
       history("/serviceOptions");
       setFlag(flag);
-    }
+    } else showToast("Please fill details", 'error');
   };
 
   const handleChange = (e) => {

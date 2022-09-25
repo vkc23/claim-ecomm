@@ -8,6 +8,7 @@ import {
   DAMAGE_DEVICE,
 } from "../../constants/mockData";
 import { claimAdded } from "../claimSlice";
+import { showToast } from "../../utils/Helper";
 import "./fileClaim.css";
 
 const FileClaim = () => {
@@ -16,8 +17,6 @@ const FileClaim = () => {
   const { pathname } = location;
   const dispatch = useDispatch();
   const [data, setData] = useState({});
-  const [error, setError] = useState(null);
-  const [selected, setSelected] = useState("possession_device_y");
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -32,10 +31,9 @@ const FileClaim = () => {
         })
       );
 
-      setError(null);
       history("/incidentInfo");
     } else {
-      setError("Fill in all fields"); // used in UI
+      showToast("Please fill details", 'error');
     }
   };
   return (
