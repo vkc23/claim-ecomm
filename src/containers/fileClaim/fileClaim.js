@@ -183,7 +183,7 @@ const FileClaim = () => {
         <div className="mb-3 w-50">
           <label className="form-label">Purchase Price, $</label>
           <input
-            type="text"
+            type="number"
             name="purchasePrice"
             className="form-control"
             value={data?.purchasePrice}

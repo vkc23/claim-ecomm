@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, ItemDetails, Stepper } from "../../components";
+import IncidentInfoView from "../incidentInformation/incidentInfoView";
+import ProfileView from "../profile/profileView";
 
 function ClaimSummary() {
-  const [flag, setFlag] = useState("submit");
   const history = useNavigate();
   const location = useLocation();
   const { pathname } = location;
@@ -13,7 +14,6 @@ function ClaimSummary() {
 
   const handleStep = () => {
     history("/claimPlaced");
-    setFlag(flag);
   };
 
   return (
@@ -29,7 +29,12 @@ function ClaimSummary() {
               style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Summary</h6>
-              <Stepper flag={flag} pathName={pathname}></Stepper>
+              <Stepper
+                current="4"
+                total="4"
+                flag="submit"
+                pathName={pathname}
+              ></Stepper>
             </div>
             <div className="p-4">
               <div className="d-flex justify-content-between border-bottom py-3">
@@ -50,18 +55,7 @@ function ClaimSummary() {
                   </Link>
                 </p>
               </div>
-              <div className="d-flex justify-content-between border-bottom py-3">
-                <span className="d-block">Date of incident</span>
-                <p className="mb-0">{step1?.data?.incidentDate ?? ""}</p>
-              </div>
-              <div className="d-flex justify-content-between border-bottom py-3">
-                <span className="d-block">Reason for claim</span>
-                <p className="mb-0">{step1?.data?.claimReason ?? ""}</p>
-              </div>
-              <div className="d-flex justify-content-between border-bottom py-3">
-                <span className="d-block">Description</span>
-                <p className="mb-0">{step1?.data?.describeIssue ?? ""}</p>
-              </div>
+              <IncidentInfoView incidentDetails={step1?.data} />
               <div className="d-flex justify-content-between py-3">
                 <span className="d-block fw-bold">Fulfillment Information</span>
                 <p className="mb-0">
@@ -98,22 +92,7 @@ function ClaimSummary() {
                   </Link>
                 </p>
               </div>
-              <div className="d-flex justify-content-between border-bottom py-3">
-                <span className="d-block">Full Name</span>
-                <p className="mb-0">{profile?.fullName ?? ""}</p>
-              </div>
-              <div className="d-flex justify-content-between border-bottom py-3">
-                <span className="d-block">Address</span>
-                <p className="mb-0 text-end">{profile?.address ?? ""}</p>
-              </div>
-              <div className="d-flex justify-content-between border-bottom py-3">
-                <span className="d-block">Email Address</span>
-                <p className="mb-0">{profile?.emailAddress ?? ""}</p>
-              </div>
-              <div className="d-flex justify-content-between border-bottom py-3">
-                <span className="d-block">Contact Number</span>
-                <p className="mb-0">{`+91-${profile?.contactNumber ?? ""}`}</p>
-              </div>
+              <ProfileView profileDetails={profile} />
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
                   <Button label="Back" variant="outline" />

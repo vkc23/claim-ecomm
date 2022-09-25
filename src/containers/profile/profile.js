@@ -10,8 +10,12 @@ const Profile = () => {
   const [data, setData] = React.useState(profile ?? {});
 
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "contactNumber" && value.length === 10) {
+      return false;
+    }
     const updateData = {
       ...data,
       [name]: value,
@@ -23,8 +27,8 @@ const Profile = () => {
       saveProfile({
         data,
       })
-    );
-    history("/");
+    );    
+    history(-1);
   };
   return (
     <div className="py-4">

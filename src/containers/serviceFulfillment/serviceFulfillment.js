@@ -7,7 +7,6 @@ import { MAILING_ADDRESS } from "../../constants/mockData";
 import { saveServiceFulfillment } from "../claimSlice";
 
 function ServiceFulfillment() {
-  const [flag, setFlag] = useState("Summary");
   const [data, setData] = useState({});
   const history = useNavigate();
   const location = useLocation();
@@ -15,7 +14,6 @@ function ServiceFulfillment() {
   const { pathname } = location;
 
   const claimsData = useSelector((state) => state.claims);
-  console.log(claimsData, "ServiceFulfillment");
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -29,7 +27,6 @@ function ServiceFulfillment() {
       })
     );
     history("/claimSummary");
-    setFlag(flag);
   };
 
   useEffect(() => {
@@ -56,7 +53,7 @@ function ServiceFulfillment() {
               style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Service Fulfillment</h6>
-              <Stepper flag={flag} pathName={pathname}></Stepper>
+              <Stepper current="3" total="4" flag="Summary" pathName={pathname}></Stepper>
             </div>
             <div className="p-4">
               <span className="d-block fw-bold mb-3">Mail in Repair</span>

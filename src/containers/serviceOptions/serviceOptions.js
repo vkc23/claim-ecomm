@@ -6,7 +6,6 @@ import { SERVICE_OPTIONS } from "../../constants/mockData";
 import { saveServiceOptions } from "../claimSlice";
 
 function ServiceOptions() {
-  const [flag, setFlag] = useState("Service Fulfillment");
   const [selectedService, setSelectedService] = useState(null);
   const history = useNavigate();
   const location = useLocation();
@@ -22,7 +21,6 @@ function ServiceOptions() {
       })
     );
     history("/serviceFulfillment");
-    setFlag(flag);
   };
   const handleService = (selectedValue) => {
     setSelectedService(selectedValue);
@@ -51,7 +49,7 @@ function ServiceOptions() {
               style={{ backgroundColor: "#fcfcfc" }}
             >
               <h6 className="m-0 p-0 fw-bold">Service Options</h6>
-              <Stepper flag={flag} pathName={pathname}></Stepper>
+              <Stepper current="2" total="4"  flag="Service Fulfillment" pathName={pathname}></Stepper>
             </div>
             <div className="p-4">
               <span className="d-block fw-bold mb-3">
@@ -82,7 +80,7 @@ function ServiceOptions() {
                   <hr />
                   <p className="mb-0">
                     Not your products location?{" "}
-                    <a href="" className="text-primary">
+                    <a className="text-primary">
                       <u>Enter a new address</u>
                     </a>
                   </p>

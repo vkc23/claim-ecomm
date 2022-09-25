@@ -21,6 +21,7 @@ import IncidentInfo from "./containers/incidentInformation/incidentInfo";
 import Profile from "./containers/profile/profile";
 import ServiceFulfillment from "./containers/serviceFulfillment/serviceFulfillment";
 import ServiceOptions from "./containers/serviceOptions/serviceOptions";
+import ThanksScreen from "./containers/thanksScreen/thanksScreen";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             />
             <Route path="/claimSummary" element={<ClaimSummary />} />
             <Route path="/claimPlaced" element={<ClaimPlaced />} />
+            <Route path="/thanks" element={<ThanksScreen />} />
           </Routes>
         </div>
         <Footer />
