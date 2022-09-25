@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Datepicker, Dropdown, RadioBtn, Button } from "../../components";
 import {
@@ -17,9 +17,11 @@ const FileClaim = () => {
   const { pathname } = location;
   const dispatch = useDispatch();
   const [data, setData] = useState({});
+  const claimsData = useSelector((state) => state.claims);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
+    console.log("=========", name, value);
     setData({ ...data, [name]: value });
   };
 
@@ -33,9 +35,40 @@ const FileClaim = () => {
 
       history("/incidentInfo");
     } else {
-      showToast("Please fill details", 'error');
+      showToast("Please fill details", "error");
     }
   };
+
+  useEffect(() => {
+    if (Object.keys(claimsData)?.length) {
+      const {
+        purchaseDate,
+        damagedDevice,
+        brand,
+        deviceType,
+        deviceNickName,
+        modal,
+        purchasePrice,
+        serialNo,
+        stillPossession,
+      } = claimsData;
+      const prevData = {
+        ...{
+          purchaseDate,
+          damagedDevice,
+          brand,
+          deviceType,
+          deviceNickName,
+          modal,
+          purchasePrice,
+          serialNo,
+          stillPossession,
+        },
+      };
+      // console.log("prevData", prevData);
+      setData({ ...data, ...prevData });
+    }
+  }, [claimsData]);
   return (
     <div className="w-75 mx-auto py-4">
       <div className="row g-0 py-4 align-items-center border-bottom">
@@ -101,10 +134,10 @@ const FileClaim = () => {
         <div className="mb-3 w-50">
           <Dropdown
             label="Device Type"
-            onchange={handleChange}
+            onChange={handleChange}
             options={DEVICE_TYPE}
             name="deviceType"
-            value={data?.deviceType}
+            selectedValue={data?.deviceType}
           />
         </div>
         <div className="mb-3 w-50">
@@ -160,8 +193,8 @@ const FileClaim = () => {
         <div className="mb-3 w-50">
           <Datepicker
             label="Purchase Date"
-            name="PurchaseDate"
-            value={data?.PurchaseDate}
+            name="purchaseDate"
+            value={data?.purchaseDate}
             onChange={handleChange}
           />
         </div>

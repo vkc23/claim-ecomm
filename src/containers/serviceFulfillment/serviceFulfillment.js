@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ItemDetails, Stepper, Button } from "../../components";
@@ -31,6 +31,17 @@ function ServiceFulfillment() {
     history("/claimSummary");
     setFlag(flag);
   };
+
+  useEffect(() => {
+    const keys = Object.keys(claimsData);
+    if (keys?.length && keys.includes("step3")) {
+      const {
+        step3,
+      } = claimsData;
+      // console.log("prevData", step3);
+      setData({ ...data, ...step3 });
+    }
+  }, [claimsData]);
 
   return (
     <>
