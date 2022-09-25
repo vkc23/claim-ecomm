@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -16,7 +16,7 @@ import "./incidentInfo.css";
 const IncidentInfo = () => {
   const claimsData = useSelector((state) => state.claims);
 
-  console.log(claimsData, "claimsData");
+  // console.log(claimsData, "claimsData");
   const history = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -33,12 +33,12 @@ const IncidentInfo = () => {
     if (Object.keys(incidentData.data)?.length) {
       dispatch(
         saveIncidentInfo({
-          data: incidentData.data,
+          incidentData,
         })
       );
       history("/serviceOptions");
       setFlag(flag);
-    } else showToast("Please fill details", 'error');
+    } else showToast("Please fill details", "error");
   };
 
   const handleChange = (e) => {
@@ -51,6 +51,17 @@ const IncidentInfo = () => {
     };
     setIncidentData({ ...incidentData, data: updateData });
   };
+
+  useEffect(() => {
+    const keys = Object.keys(claimsData);
+    if (keys?.length && keys.includes('step1')) {
+      const {
+        step1: { isComplete, data },
+      } = claimsData;
+      // console.log("prevData", isComplete, data);
+      setIncidentData({ ...incidentData, isComplete: isComplete, data: data });
+    }
+  }, [claimsData]);
 
   return (
     <>
@@ -95,7 +106,7 @@ const IncidentInfo = () => {
                   label="Select the reason for your claim/request."
                   options={REASON_FOR_CLAIM}
                   name="claimReason"
-                  value={incidentData.data?.claimReason}
+                  selectedValue={incidentData.data?.claimReason}
                   onChange={handleChange}
                 />
               </div>

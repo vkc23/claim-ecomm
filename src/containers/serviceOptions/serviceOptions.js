@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, ItemDetails, Stepper } from "../../components";
@@ -13,8 +13,6 @@ function ServiceOptions() {
   const dispatch = useDispatch();
   const claimsData = useSelector((state) => state.claims);
 
-  console.log(claimsData, "ServiceOptions");
-
   const { pathname } = location;
 
   const handleStep = () => {
@@ -26,6 +24,19 @@ function ServiceOptions() {
     history("/serviceFulfillment");
     setFlag(flag);
   };
+  const handleService = (selectedValue) => {
+    setSelectedService(selectedValue);
+  };
+  useEffect(() => {
+    const keys = Object.keys(claimsData);
+    if (keys?.length && keys.includes("step2")) {
+      const {
+        step2: { selectedService },
+      } = claimsData;
+      // console.log("prevData", selectedService);
+      handleService(selectedService);
+    }
+  }, [claimsData]);
 
   return (
     <>
@@ -82,7 +93,7 @@ function ServiceOptions() {
                   <div
                     className="col-6"
                     key={service.id}
-                    onClick={() => setSelectedService(service.id)}
+                    onClick={() => handleService(service.id)}
                   >
                     <Card
                       selected={selectedService === service.id}
