@@ -13,7 +13,7 @@ const claimSlice = createSlice({
       return { ...state, ...action.payload.data };
     },
     saveServiceOptions(state, action) {
-      return { ...state, ...action.payload.data };
+      return { ...state, ...action.payload };
     },
     saveServiceFulfillment(state, action) {
       return { ...state, ...action.payload.data };

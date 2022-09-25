@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Card, ItemDetails, Stepper, Button } from "../../components";
-import MaintenanceImg from "../../assets/images/maintenance-icon.svg";
+import { Button, Card, ItemDetails, Stepper } from "../../components";
+import { SERVICE_OPTIONS } from "../../constants/mockData";
 import { saveServiceOptions } from "../claimSlice";
 
 function ServiceOptions() {
   const [flag, setFlag] = useState("Service Fulfillment");
-  const [data, setData] = useState({});
+  const [selectedService, setSelectedService] = useState(null);
   const history = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function ServiceOptions() {
   const handleStep = () => {
     dispatch(
       saveServiceOptions({
-        data,
+        selectedService,
       })
     );
     history("/serviceFulfillment");
@@ -78,44 +78,29 @@ function ServiceOptions() {
                 </div>
               </div>
               <div className="row g-4 pt-4 service-boxs">
-                <div className="col-6">
-                  <Card
-                    imgSrc={MaintenanceImg}
-                    title="Schedule a visit"
-                    description="Make an appointment at an Pocket Geek Authorized Service Provider"
+                {SERVICE_OPTIONS.map((service) => (
+                  <div
+                    className="col-6"
+                    key={service.id}
+                    onClick={() => setSelectedService(service.id)}
                   >
-                    <div className="d-flex justify-content-between">
-                      <span>Deductible:</span> <span>$89.00</span>
-                    </div>
-                  </Card>
-                </div>
-                <div className="col-6">
-                  <Card
-                    imgSrc={MaintenanceImg}
-                    title="Send in for repair"
-                    description="A courier will pick up your product and deliver it to
-                    Pocket Geek"
-                  >
-                    <div className="d-flex justify-content-between">
-                      <span>Deductible:</span> <span>$89.00</span>
-                    </div>
-                  </Card>
-                </div>
-                <div className="col-6">
-                  <Card
-                    imgSrc={MaintenanceImg}
-                    title="Contact us"
-                    description="Talk to an Pocket Geek Support Advisor"
-                  >
-                    <div className="d-flex justify-content-between">
-                      <span>Deductible:</span> <span>$89.00</span>
-                    </div>
-                  </Card>
-                </div>
+                    <Card
+                      selected={selectedService === service.id}
+                      imgSrc={service.imgSrc}
+                      title={service.label}
+                      description={service.description}
+                    >
+                      <div className="d-flex justify-content-between">
+                        <span>Deductible:</span>{" "}
+                        <span>{service.deductPrice}</span>
+                      </div>
+                    </Card>
+                  </div>
+                ))}
               </div>
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
-                <Button label="Back" variant="outline" />
+                  <Button label="Back" variant="outline" />
                   {/* <button
                     type="button"
                     className="btn btn-outline-primary py-2 px-4"
@@ -125,11 +110,7 @@ function ServiceOptions() {
                   </button> */}
                 </div>
                 <div className="col-auto">
-                <Button
-                    label="Next"
-                    variant="primary"
-                    click={handleStep}
-                  />
+                  <Button label="Next" variant="primary" click={handleStep} />
                   {/* <button
                     type="button"
                     className="btn btn-primary py-2 px-4"
