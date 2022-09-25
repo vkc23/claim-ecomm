@@ -1,56 +1,72 @@
 import React from "react";
-import { Button } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button, Input } from "../../components";
+import { saveProfile } from "../claimSlice";
 
 const Profile = () => {
-  const [data, setData] = React.useState({});
+  const profile = useSelector((state) => state.claims?.profile);
+  const history = useNavigate();
+  const [data, setData] = React.useState(profile ?? {});
 
-  const handleChange = () => {};
-  const handleEvent = () => {};
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const updateData = {
+      ...data,
+      [name]: value,
+    };
+    setData({ ...data, ...updateData });
+  };
+  const handleEvent = () => {
+    dispatch(
+      saveProfile({
+        data,
+      })
+    );
+    history("/");
+  };
   return (
     <div className="py-4">
       <span className="d-block fw-bold mb-5">Welcome to your Profile.</span>
       <div className="mb-3 w-50">
-        <label className="form-label">Full Name</label>
-        <input
-          type="text"
+        <Input
+          label="Full Name"
           name="fullName"
-          className="form-control"
+          type="text"
           value={data?.fullName}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3 w-50">
-        <label className="form-label">Address</label>
-        <input
-          type="address"
-          name="Address"
-          className="form-control"
+        <Input
+          label="Address"
+          name="address"
+          type="text"
           value={data?.address}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3 w-50">
-        <label className="form-label">Email Address</label>
-        <input
-          type="text"
+        <Input
+          label="Email Address"
           name="emailAddress"
-          className="form-control"
+          type="text"
           value={data?.emailAddress}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3 w-50">
-        <label className="form-label">Contact Number</label>
-        <input
-          type="text"
+        <Input
+          label="Contact Number"
           name="contactNumber"
-          className="form-control"
+          type="number"
           value={data?.contactNumber}
           onChange={handleChange}
         />
       </div>
       <div className="d-flex justify-content-end w-50">
-        <Button label="Save Profile" variant="primary" click={handleEvent} />
+        <Button label="Update Profile" variant="primary" click={handleEvent} />
       </div>
     </div>
   );

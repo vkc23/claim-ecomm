@@ -18,6 +18,9 @@ const claimSlice = createSlice({
     saveServiceFulfillment(state, action) {
       return { ...state, step3: { ...action.payload.data } };
     },
+    saveProfile(state, action) {
+      return { ...state, profile: { ...action.payload.data } };
+    },
   },
 });
 
@@ -26,6 +29,7 @@ export const {
   saveIncidentInfo,
   saveServiceOptions,
   saveServiceFulfillment,
+  saveProfile,
 } = claimSlice.actions;
 
 export default claimSlice.reducer;
