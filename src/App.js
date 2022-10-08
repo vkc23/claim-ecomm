@@ -9,23 +9,24 @@ import {
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //Components
-import ClaimBar from "./components/shared/claimBar/claimBar";
-import Footer from "./components/shared/footer/footer";
-import Header from "./components/shared/header/header";
+import { ClaimBar, Footer, Header } from "./components";
 
 //Container
-import ClaimPlaced from "./containers/claimPlaced/claimPlaced";
-import ClaimSummary from "./containers/claimSummary/claimSummary";
-import FileClaim from "./containers/fileClaim/fileClaim";
-import IncidentInfo from "./containers/incidentInformation/incidentInfo";
-import Profile from "./containers/profile/profile";
-import ServiceFulfillment from "./containers/serviceFulfillment/serviceFulfillment";
-import ServiceOptions from "./containers/serviceOptions/serviceOptions";
-import ThanksScreen from "./containers/thanksScreen/thanksScreen";
-import Home from "./containers/home/home";
-import Account from "./containers/account/account";
-import MyDevices from "./containers/myDevices/myDevices";
-import TechServices from "./containers/techServices/techServices";
+import {
+  ClaimPlaced,
+  ClaimSummary,
+  FileClaim,
+  IncidentInfo,
+  Profile,
+  ServiceFulfillment,
+  ThanksScreen,
+  ServiceOptions,
+  Home,
+  Account,
+  MyDevices,
+  TechServices,
+  ProfileFormik
+} from "./containers";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate replace to="/home" />} />
             <Route path="/fileClaim" element={<FileClaim />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<ProfileFormik />} />
 
             <Route path="/incidentInfo" element={<IncidentInfo />} />
             <Route path="/serviceOptions" element={<ServiceOptions />} />

@@ -2,9 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 // import "./thanks.css";
-const ThanksScreen = () => {
+export const ThanksScreen = () => {
   const storeData = useSelector((state) => state.claims);
-  console.log("ThanksScreen store data", storeData);
   return (
     <>
       <b> Thanks for placed the Claim</b>
@@ -15,4 +14,3 @@ const ThanksScreen = () => {
   );
 };
 
-export default ThanksScreen;

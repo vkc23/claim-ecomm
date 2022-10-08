@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, ItemDetails, Stepper } from "../../components";
 import { SERVICE_OPTIONS } from "../../constants/mockData";
-import { saveServiceOptions } from "../claimSlice";
+import { saveServiceOptions } from "../../store/claimSlice";
 
-function ServiceOptions() {
+export const ServiceOptions = () => {
   const [selectedService, setSelectedService] = useState(null);
   const history = useNavigate();
   const location = useLocation();
@@ -112,23 +112,10 @@ function ServiceOptions() {
               <div className="row align-items-center justify-content-between pt-4">
                 <div className="col-auto">
                   <Button label="Back" variant="outline" />
-                  {/* <button
-                    type="button"
-                    className="btn btn-outline-primary py-2 px-4"
-                    onClick={stepBack}
-                  >
-                    Back
-                  </button> */}
+                  
                 </div>
                 <div className="col-auto">
                   <Button label="Next" variant="primary" click={handleStep} />
-                  {/* <button
-                    type="button"
-                    className="btn btn-primary py-2 px-4"
-                    onClick={handleStep}
-                  >
-                    Next
-                  </button> */}
                 </div>
               </div>
             </div>
@@ -142,4 +129,3 @@ function ServiceOptions() {
   );
 }
 
-export default ServiceOptions;

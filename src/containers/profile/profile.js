@@ -2,9 +2,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Input } from "../../components";
-import { saveProfile } from "../claimSlice";
+import { saveProfile } from "../../store/claimSlice";
 
-const Profile = () => {
+export const Profile = () => {
   const profile = useSelector((state) => state.claims?.profile);
   const history = useNavigate();
   const [data, setData] = React.useState(profile ?? {});
@@ -27,7 +27,7 @@ const Profile = () => {
       saveProfile({
         data,
       })
-    );    
+    );
     history(-1);
   };
   return (
@@ -69,11 +69,27 @@ const Profile = () => {
           onChange={handleChange}
         />
       </div>
+      <div className="mb-3 w-50">
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          value={data?.password}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3 w-50">
+        <Input
+          label="Confirm Password"
+          name="confirmPassword"
+          type="password"
+          value={data?.confirmPassword}
+          onChange={handleChange}
+        />
+      </div>
       <div className="d-flex justify-content-end w-50">
         <Button label="Update Profile" variant="primary" click={handleEvent} />
       </div>
     </div>
   );
 };
-
-export default Profile;
